@@ -1,0 +1,43 @@
+@media screen and (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    th, td {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+    }
+
+    tr {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        display: block;
+    }
+
+    nav {
+        text-align: left;
+    }
+
+    nav a {
+        display: block;
+        margin: 5px 0;
+    }
+
+    button {
+        width: 100%;
+        font-size: 14px;
+    }
+}

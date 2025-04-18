@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在庫一覧</title>
+</head>
+<body>
+    <nav>
+        <a href="/">在庫一覧</a>
+        <a href="/add_item">商品追加</a>
+    </nav>
+    <h1>在庫一覧</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>商品名</th>
+                <th>単位</th>
+                <th>現在の在庫数</th>
+                <th>アラート閾値</th>
+                <th>ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>
+                    {% if item[2] < item[3] %}
+                        <span style="color: red;">要補充</span>
+                    {% else %}
+                        <span>十分</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>在庫の追加・削除</h2>
+<form action="/update_stock" method="post">
+    <label for="item_id">商品ID:</label>
+    <input type="number" id="item_id" name="item_id" required><br>
+
+    <label for="quantity">数量:</label>
+    <input type="number" id="quantity" name="quantity" step="0.01" required><br>
+
+    <label for="movement_type">操作:</label>
+    <select id="movement_type" name="movement_type" required>
+        <option value="in">追加</option>
+        <option value="out">削除</option>
+    </select><br>
+
+    <button type="submit">更新</button>
+</form>
+
+{% if low_stock_items %}
+<div style="color: red;">
+    <h2>注意: 以下の商品は在庫が少なくなっています</h2>
+    <ul>
+        {% for item in low_stock_items %}
+        <li>{{ item[0] }} (現在の在庫: {{ item[2] }}, アラート閾値: {{ item[3] }})</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+</body>
+</html>
