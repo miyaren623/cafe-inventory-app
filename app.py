@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
+import os
 
 app = Flask(__name__)
 
@@ -77,5 +78,4 @@ def edit_item(item_id):
 
     return render_template('edit_item.html', item=item, item_id=item_id)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# 🔧 ここがRender用の起動設定です！
