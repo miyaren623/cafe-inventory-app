@@ -79,3 +79,7 @@ def edit_item(item_id):
     return render_template('edit_item.html', item=item, item_id=item_id)
 
 # 🔧 ここがRender用の起動設定です！
+# 🔧 ここがRender用の起動設定です！
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port, debug=True)
